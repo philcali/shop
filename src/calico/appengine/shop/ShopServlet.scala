@@ -67,6 +67,7 @@ class ShopServlet extends Step with Templating {
       q.setClass(classOf[Item])
       q.setFilter("listid == listidParam")
       q.setOrdering("id desc")
+      q.declareParameters("Long listidParam")
       q.execute(params(":listid").toLong)
     }
     
@@ -104,6 +105,7 @@ class ShopServlet extends Step with Templating {
     val userlists = query { q =>
       q.setClass(classOf[UserList])
       q.setFilter("listid == listParam")
+      q.declareParameters("Long listParam")
       q.execute(list.getId)
     }
     
@@ -113,6 +115,7 @@ class ShopServlet extends Step with Templating {
       val items: List[Item] = query { q =>
         q.setClass(classOf[Item])
         q.setFilter("listid == idParam")
+        q.declareParameters("Long idParam")
         q.execute(list.getId)
       }
       items foreach(i => remove(classOf[Item], i.getId))
@@ -129,6 +132,7 @@ class ShopServlet extends Step with Templating {
       q.setClass(classOf[Item])
       q.setFilter("listid == listidParam")
       q.setOrdering("id desc")
+      q.declareParameters("Long listidParam")
       q.execute(params(":listid").toLong)
     }
     
@@ -139,6 +143,7 @@ class ShopServlet extends Step with Templating {
     val userlists = query { q =>
       q.setClass(classOf[UserList])
       q.setFilter("email == emailParam")
+      q.declareParameters("String emailParam")
       q.execute(getEmail)
     }
     
