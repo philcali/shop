@@ -1,0 +1,8 @@
+<li id="item_{:item.id}" class="item">
+	<span>
+		Item <input id="name_{:item.id}" style="width: 10em;" type="text" name="name_{:item.id}" value="{:item.name}"> 
+        Qt <input id="qt_{:item.id}" style="width: 2em;" type="text" name="qt_{:item.id}" value="{:item.quantity}">
+        Price $<input id="price_{:item.id}" style="width: 5em;" type="text" name="price_{:item.id}" value="{:item.price}">
+    </span>
+    <a href="#" class="remove_{:item.id}"><img src="/images/delete.png"/></a>
+</li>

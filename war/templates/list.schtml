@@ -1,0 +1,12 @@
+<div class="wrap">
+    <h2>Editing {:list.name} list
+    <a href="/viewlist/{:list.id}"><img src="/images/zoom.png"/></a> | 
+    <a href="#" class="add_item"><img src="/images/add.png"/></a></h2>
+    <form method="post" action="/list">
+      <input class="listid" type="hidden" name="id" value="{:list.id}">
+      <ul id="items">
+      	{:item.list}
+        <li>Total: $<span class="total">0.00</span></li>
+      </ul>
+    </form>
+</div>

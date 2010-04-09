@@ -1,0 +1,19 @@
+.list-wrap {
+ font-family:"Helvetica,Tahoma Bold", sans-serif;
+ -webkit-text-size-adjust:none;
+ background-image: url(/images/list.jpg); 
+ height:654px;
+ width: 319px;
+}
+.list-head {
+height: 235px;
+}
+.list-body {
+	color: #900000;
+}
+#items {
+	list-style-type: none;
+}
+#items li{
+	margin: 4px 0;
+}

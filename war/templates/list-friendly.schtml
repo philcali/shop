@@ -1,0 +1,3 @@
+<li class="item">
+	<input id="item_{:item.id}" type="checkbox" name="item_{:item.id}"><span id="item_text_{:item.id}">{:item.print}<span>
+</li>

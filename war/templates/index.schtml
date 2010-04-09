@@ -1,0 +1,9 @@
+<div class="wrap">
+	<span>Welcome, {:user.string}</span>. <a href="{:logout.string}">Logout?</a>
+    <ul id="nav">
+      <li><a class="create_list" href="#">Create List</a></li>
+      <li><a class="manage_list" href="#">Manage Lists</a></li>
+    </ul>
+    <div id="dynamic">
+    </div>
+</div>

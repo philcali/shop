@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>{:list.name}<title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+		<link rel="stylesheet" href="/css/list.css" type="text/css">
+		<script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>
+	</head>
+	<body>
+		<div class="list-wrap">
+			<div class="list-head">
+				<h1>{:list.name}</h1>
+			</div>
+			<div class="list-body">
+				<ul id="items">
+					{:item.list-friendly}
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript" src="/js/viewlist.js"></script>
+	</body>
+</html>

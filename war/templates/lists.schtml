@@ -1,0 +1,8 @@
+<div class="success"></div>
+<div class="wrap">
+	<table>
+		<th>Name</th>
+		<th>Actions</th>
+		{:lists.iterate}
+	</table>
+</div>
