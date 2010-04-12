@@ -27,7 +27,8 @@ a:visited {
 }
 
 .wrap table {
-	width: 80%;
+	font-size:130%;
+	width: 90%;
 	margin: auto auto;
 	text-align: center;
 	padding: 0;
@@ -47,8 +48,9 @@ a:visited {
 }
 
 #nav {
-  width: 50%;
+  width: 70%;
   list-style-type: none;
+  padding:0;
   overflow: hidden;
   padding: 0;
   margin: 10px auto;

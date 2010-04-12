@@ -1,15 +1,20 @@
 package calico.appengine.shop.data;
 
+import java.util.Date;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
+
 @PersistenceCapable
 public class Item {
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-	private Long id;
+	private Key key;
 	
 	@Persistent
 	private Long listid;
@@ -28,10 +33,11 @@ public class Item {
 		this.price = 0.00;
 		this.quantity = 1;
 		this.listid = listid;
+		this.key = KeyFactory.createKey(Item.class.getSimpleName(), listid + String.valueOf(new Date().getTime()));
 	}
 	
-	public Long getId() {
-		return id;
+	public Key getKey() {
+		return key;
 	}
 	
 	public String getName() {

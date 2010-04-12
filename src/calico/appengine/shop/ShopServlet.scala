@@ -6,12 +6,15 @@ import com.google.appengine.api.users.UserServiceFactory
 import calico.appengine.shop.data.PMF.{save, query, remove, getSingle => single, using}
 import calico.appengine.shop.data.{ShopList, UserList, Item, ShareRequest}
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.Key;
 
 class ShopServlet extends Step with Templating {
   type Model =  {
     def getId : Long
     def getName : String
   }
+  
+  type KeyedModel = { def getKey: Key}
   
   def getEmail = UserServiceFactory.getUserService.getCurrentUser.getEmail
   
@@ -53,8 +56,8 @@ class ShopServlet extends Step with Templating {
       }
     }
     
-    load("request", "id") { obj =>
-      obj.asInstanceOf[ShareRequest].getKey.getName
+    loadList(List("request", "item"), "id") { (p,obj) =>
+      obj.asInstanceOf[KeyedModel].getKey.getName
     }
     
     load("request", "iterate") { (obj) => 
@@ -71,8 +74,8 @@ class ShopServlet extends Step with Templating {
     load("request", "info") { obj =>
       val r = obj.asInstanceOf[ShareRequest]
       val list = single(classOf[ShopList], r.getListid)
-      val rr = if(r.getRequester == getEmail) " you " else r.getRequester
-      val re = if(r.getRequestee == getEmail) " you " else r.getRequestee
+      val rr = if(r.getRequester.equalsIgnoreCase(getEmail)) " you " else r.getRequester
+      val re = if(r.getRequestee.equalsIgnoreCase(getEmail)) " you " else r.getRequestee
       list.getName + " from " + rr + " to " + re
     }
   }
@@ -90,7 +93,7 @@ class ShopServlet extends Step with Templating {
     val items = query { q =>
       q.setClass(classOf[Item])
       q.setFilter("listid == listidParam")
-      q.setOrdering("id desc")
+      q.setOrdering("key desc")
       q.declareParameters("Long listidParam")
       q.execute(params(":listid").toLong)
     }
@@ -142,7 +145,7 @@ class ShopServlet extends Step with Templating {
         q.declareParameters("Long idParam")
         q.execute(list.getId)
       }
-      items foreach(i => remove(classOf[Item], i.getId))
+      items foreach(i => remove(classOf[Item], i.getKey))
       remove(classOf[ShopList], list.getId)
     }
     
@@ -155,7 +158,7 @@ class ShopServlet extends Step with Templating {
     val items = query { q =>
       q.setClass(classOf[Item])
       q.setFilter("listid == listidParam")
-      q.setOrdering("id desc")
+      q.setOrdering("key desc")
       q.declareParameters("Long listidParam")
       q.execute(params(":listid").toLong)
     }
@@ -196,7 +199,7 @@ class ShopServlet extends Step with Templating {
     val request = single(classOf[ShareRequest], params(":key"))
     
     // if the requester accepts his own, just ignore
-    if(request.getRequester == getEmail) "fail"
+    if(request.getRequester.equalsIgnoreCase(getEmail)) "fail"
     else {
       val userlist = new UserList(getEmail, request.getListid)
       save(userlist)
@@ -214,7 +217,7 @@ class ShopServlet extends Step with Templating {
   }
   
   post("/sharelist/:listid/:user") {
-    val request = new ShareRequest(params(":listid").toLong, getEmail, params(":user"))
+    val request = new ShareRequest(params(":listid").toLong, getEmail.toLowerCase, params(":user").toLowerCase)
     
     save(request)
     
@@ -232,7 +235,7 @@ class ShopServlet extends Step with Templating {
   }
   
   post("/edititem/:id/:name/:quantity/:price") {
-    val item = single(classOf[Item], params(":id").toLong)
+    val item = single(classOf[Item], params(":id"))
     
     item.setName(params(":name"))
     item.setQuantity(params(":quantity").toInt)
@@ -243,7 +246,7 @@ class ShopServlet extends Step with Templating {
   }
   
   post("/deleteitem/:itemid") {
-    remove(classOf[Item], params(":itemid").toLong)
+    remove(classOf[Item], params(":itemid"))
 
     "Success"
   }

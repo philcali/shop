@@ -1,19 +1,29 @@
 .list-wrap {
  font-family:"Helvetica,Tahoma Bold", sans-serif;
  -webkit-text-size-adjust:none;
- background-image: url(/images/list.jpg); 
- height:654px;
- width: 319px;
+ width: 304px;
 }
 .list-head {
-height: 235px;
 }
 .list-body {
 	color: #900000;
+	border: 1px solid #000000;
+	background-color: #fffccc;	
 }
+
+.item input {
+	margin-left: 18px;
+}
+
 #items {
+	padding-top: 7px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 15px;
 	list-style-type: none;
+	
 }
 #items li{
-	margin: 4px 0;
+	margin: 5px 0;
+	border-bottom: 1px solid #000000;
 }

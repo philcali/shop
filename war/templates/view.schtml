@@ -11,6 +11,10 @@
 				<h1>{:list.name}</h1>
 			</div>
 			<div class="list-body">
+				<div class="items-head">
+					<h1 style="text-align:center;">Shopping List</h1>
+				</div>
+				<hr/>
 				<ul id="items">
 					{:item.list-friendly}
 				</ul>

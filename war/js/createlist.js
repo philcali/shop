@@ -69,6 +69,7 @@ $(document).ready(function() {
 				  $.post('/acceptlist/' + key, function(data){
 					  if(data == "success") {
 						  $('#list_' + jquerySafe(key)).remove();
+						  $('.success').html("Accepted Request")
 					  } else {
 						  $('.error').html("You requested this one.");
 						  $('.error').click(function(){
@@ -82,14 +83,10 @@ $(document).ready(function() {
 		  $('.deny').each(function(index){
 			  $(this).click(function (){
 				  var key = $(this).attr('id').split('_')[1];
-				  alert(jquerySafe(key));
-				  $('#list_' + jquerySafe(key)).remove();
-				  /*
 				  $.post('/denyrequest/' + key, function(data){
 					  $('#list_' + jquerySafe(key)).remove();
 					  $('.success').html("Removed request");
 				  });
-				  */
 			  });
 		  });
 	  });
@@ -101,7 +98,7 @@ function jquerySafe(string) {
 	                '=', '>' ,'(', ')', '[',']', "'", '"', '+', '*', ',', '/'];
 	for (var i = 0; i < possible.length; i++) {
 		var regexp = new RegExp('\\' + possible[i], 'gi');
-		string = string.replace(regexp, '\\\\' + possible[i]);
+		string = string.replace(regexp, '\\' + possible[i]);
 	}
 	return string;
 }
