@@ -1,10 +1,10 @@
 <div class="success"></div>
+<div class="error"></div>
 <div class="wrap">
 	<table>
 		<th>Name</th>
 		<th>When</th>
 		<th>Actions</th>
-		{:list.iterate}
+		{:request.iterate}
 	</table>
-	<div class="results"></div>
 </div>

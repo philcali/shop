@@ -3,6 +3,7 @@
     <ul id="nav">
       <li><a class="create_list" href="#">Create List</a></li>
       <li><a class="manage_list" href="#">Manage Lists</a></li>
+      <li><a class="shared_list" href="#">Share Requests</a></li>
     </ul>
     <div id="dynamic">
     </div>

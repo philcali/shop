@@ -1,5 +1,7 @@
 package calico.appengine.shop.data;
 
+import java.util.Date;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -14,8 +16,16 @@ public class ShopList {
 	@Persistent
 	private String name;
 	
+	@Persistent
+	private Date createdAt;
+	
 	public ShopList(String name) {
 		this.name = name;
+		this.createdAt = new Date();
+	}
+	
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 	
 	public String getName() {

@@ -1,0 +1,8 @@
+<tr id="list_{:request.id}">
+	<td>{:request.info}</td>
+	<td>{:request.date}</td>
+    <td><a href="/viewlist/{:request.listid}"><img src="/images/zoom.png"/></a> |
+    	<a id="acceptlist_{:request.id}" class="accept" href="#"><img src="/images/email_go.png"/></a> |
+        <a id="denylist_{:request.id}" class="deny" href="#"><img src="/images/delete.png"/></a>
+    </td>
+</tr>
