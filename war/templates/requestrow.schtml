@@ -1,7 +1,7 @@
 <tr id="list_{:request.id}">
 	<td style="width:30%">{:request.info}</td>
-	<td style="width:30%">{:request.date}</td>
-    <td style="width:40%"><a href="/viewlist/{:request.listid}"><img src="/images/zoom.png"/></a> |
+	<td style="width:25%">{:request.date}</td>
+    <td style="width:45%"><a href="/viewlist/{:request.listid}"><img src="/images/zoom.png"/></a> |
     	<a id="acceptlist_{:request.id}" class="accept" href="#"><img src="/images/accept.png"/></a> |
         <a id="denylist_{:request.id}" class="deny" href="#"><img src="/images/delete.png"/></a>
     </td>

@@ -1,4 +1,8 @@
 <div class="success"></div>
+<div class="merge" style="display: none;">
+	<input type="button" class="process" value="Process Merges">
+	<input type="button" class="stop" value="Stop Merge">
+</div>
 <div class="wrap">
 	<table>
 		<th>Name</th>

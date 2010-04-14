@@ -29,9 +29,13 @@ public class Item {
 	private Double price;
 	
 	public Item(String name, Long listid) {
+		this(listid, name, 1, 0.00);
+	}
+	
+	public Item(Long listid, String name, Integer quantity, Double price) {
 		this.name = name;
-		this.price = 0.00;
-		this.quantity = 1;
+		this.price = price;
+		this.quantity = quantity;
 		this.listid = listid;
 		this.key = KeyFactory.createKey(Item.class.getSimpleName(), listid + String.valueOf(new Date().getTime()));
 	}
@@ -66,5 +70,11 @@ public class Item {
 	
 	public Long getListid() {
 		return listid;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Item i = (Item) obj;
+		return (i.name == this.name && i.price == this.price && i.quantity == this.quantity);
 	}
 }

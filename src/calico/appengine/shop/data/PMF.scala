@@ -27,17 +27,11 @@ object PMF {
   
   def using[T](fun: PersistenceManager => T) = {
     val pm = pmf.getPersistenceManager
-    val tx = pm.currentTransaction
     
     try {
-      tx.begin
       val results = fun(pm)
-      tx.commit
       results
     } finally {
-      if(tx.isActive){
-        tx.rollback
-      }
       pm.close
     }
   }

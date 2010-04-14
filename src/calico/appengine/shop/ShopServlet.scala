@@ -171,6 +171,7 @@ class ShopServlet extends Step with Templating {
       q.setClass(classOf[UserList])
       q.setFilter("email == emailParam")
       q.declareParameters("String emailParam")
+      q.setOrdering("listid asc")
       q.execute(getEmail)
     }
     
@@ -182,17 +183,48 @@ class ShopServlet extends Step with Templating {
       q.setClass(classOf[ShareRequest])
       q.setFilter("requester == requestParam")
       q.declareParameters("String requestParam")
-      q.execute(getEmail)
+      q.execute(getEmail.toLowerCase)
     }
     
     val otherRequests = query { q =>
       q.setClass(classOf[ShareRequest])
       q.setFilter("requestee == requestParam")
       q.declareParameters("String requestParam")
-      q.execute(getEmail)
+      q.execute(getEmail.toLowerCase)
     }
     
     template("requests", ("request", otherRequests ::: pendingRequests))
+  }
+  
+  post("/mergelist/:listids") {
+    val ls = params(":listids").split("-")
+    
+    // Get the list names
+    val lists: List[ShopList] = query{ q=>
+      q.setClass(classOf[ShopList])
+      q.setFilter(ls.map(l => " id == "+ l).mkString("(", " || ", ")"))
+      q.execute()
+    }
+    val newList = new ShopList(lists.map(_.getName).mkString(" / "))
+    save(newList)
+    
+    val user = new UserList(getEmail, newList.getId)
+    save(user)
+    
+    // Now begin merging the items
+    val items: List[Item] = query { q=>
+      q.setClass(classOf[Item])
+      q.setFilter(ls.map(l => " listid == "+ l).mkString("(", " || ", ")"))
+      q.execute()
+    }
+    // Remove duplicates, and copy items over
+    items.removeDuplicates.foreach{i =>
+      val item = new Item(newList.getId, i.getName, i.getQuantity, i.getPrice)
+      save(item)
+    }
+    
+    // Add list to the table
+    template("listrow", ("list", newList))
   }
   
   post("/acceptlist/:key") {

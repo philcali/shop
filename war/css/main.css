@@ -40,11 +40,17 @@ a:visited {
 	background-color: #fffeee;
 }
 
-.wrap table tr {
+.wrap table td.merged {
+	background-color: #fff000;
 }
 
 .wrap table td {
 	background-color: #eeeeee;
+}
+
+.wrap table td.list_name,
+.wrap table td.list_date {
+	width: 25%;
 }
 
 #nav {

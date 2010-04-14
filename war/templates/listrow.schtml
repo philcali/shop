@@ -1,9 +1,16 @@
 <tr id="list_{:list.id}">
-	<td>{:list.name}</td>
-	<td>{:list.date}</td>
-    <td><a href="/viewlist/{:list.id}"><img src="/images/zoom.png"/></a> |
+	<td class="list_name">{:list.name}</td>
+	<td class="list_date">{:list.date}</td>
+    <td class="list_actions">
+    	<span class="action">
+    	<a href="/viewlist/{:list.id}"><img src="/images/zoom.png"/></a> |
     	<a id="sharelist_{:list.id}" class="share" href="#"><img src="/images/email_go.png"/></a> |
     	<a id="editlist_{:list.id}" class="edit" href="#"><img src="/images/pencil.png"/></a> |
+    	<a id="merge_{:list.id}" class="merge_list" href="#"><img src="/images/arrow_join.png"/></a> |
         <a id="deletelist_{:list.id}" class="delete" href="#"><img src="/images/delete.png"/></a>
+        </span>
+        <span style="display:none;" class="merge">
+        	Merge <input type="checkbox" value="1" name="merge_{:list.id}">
+        </span>
     </td>
 </tr>
